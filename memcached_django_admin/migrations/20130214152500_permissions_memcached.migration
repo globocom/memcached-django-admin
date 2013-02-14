@@ -1,0 +1,34 @@
+SQL_UP = """
+
+	/* delete all content types */
+ 	DELETE FROM django_content_type WHERE name in ('memcached') and app_label = 'memcached';
+
+ 	/*  CONTENT TYPE  */
+ 	INSERT INTO django_content_type(name, app_label, model) VALUE ('memcached','memcached','memcachedkey');
+
+	/* delete all permissions */
+ 	DELETE FROM auth_permission WHERE content_type_id in (select id from django_content_type where app_label = 'memcached' AND name in ('memcached'));
+
+ 	/* ADD */
+ 	INSERT INTO auth_permission(name, content_type_id, codename)
+ 	VALUES ('Can add memcached key', (SELECT id from django_content_type WHERE app_label='memcached' AND model='memcachedkey'), 'add_memcached_key');
+
+ 	/* CHANGE  */
+ 	INSERT INTO auth_permission(name, content_type_id, codename)
+ 	VALUES ('Can change memcached key', (SELECT id from django_content_type WHERE app_label='memcached' AND model='memcachedkey'), 'change_memcached_key');
+
+ 	/* DELETE  */
+ 	INSERT INTO auth_permission(name, content_type_id, codename)
+ 	VALUES ('Can delete memcached key', (SELECT id from django_content_type WHERE app_label='memcached' AND model='memcachedkey'), 'delete_memcached_key');
+
+"""
+
+SQL_DOWN = """
+
+ 	DELETE FROM auth_permission
+ 	WHERE  content_type_id in (select id from django_content_type where app_label = 'memcached'
+ 	                           AND name in ('memcached'));
+ 	                           
+ 	DELETE FROM django_content_type WHERE app_label = 'memcached' AND model in ('memcachedkey');
+
+"""

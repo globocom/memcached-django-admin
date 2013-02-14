@@ -1,0 +1,15 @@
+{% extends "admin/change_form.html" %}
+
+{% block button_bar %}
+<div class="submit-row">
+
+	<input type="submit" id="save" value="send" name="_save" class="btn-default btn-important"/>
+
+    {% if is_popup %}
+        <a href="#" class="btn-default" onclick="window.close();">cancel</a>
+    {% else %}
+        <a href="../" class="btn-default">cancel</a>
+    {% endif %}
+
+</div>
+{% endblock %}

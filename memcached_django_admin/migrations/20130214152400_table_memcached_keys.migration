@@ -1,0 +1,15 @@
+SQL_UP = """
+
+CREATE TABLE memcached_key (
+    memcached_key_id integer AUTO_INCREMENT NOT NULL,
+    key_txt TINYTEXT NOT NULL,
+    PRIMARY KEY (`memcached_key_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+"""
+
+SQL_DOWN = """
+
+    DROP TABLE memcached_key;
+
+"""
